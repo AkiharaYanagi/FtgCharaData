@@ -1,32 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="ソース ファイル">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="ヘッダー ファイル">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="リソース ファイル">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Chara">
       <UniqueIdentifier>{b0587906-1abc-4272-b847-cd516eecc358}</UniqueIdentifier>
     </Filter>
     <Filter Include="IO">
       <UniqueIdentifier>{ede66bb8-2195-4d84-a1ce-5abad040ccb3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Document">
+      <UniqueIdentifier>{6ddbf0d2-f935-4cda-a27f-4d14211068d0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="framework.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="pch.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Chara.h">
       <Filter>Chara</Filter>
     </ClInclude>
@@ -36,14 +21,32 @@
     <ClInclude Include="..\include\Define.h">
       <Filter>Chara</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Chara_Const.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Compend.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Route.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Sequence.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Rect.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ScriptParam_Staging.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ScriptParam_Battle.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\EffectGenerate.h">
+      <Filter>Chara</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="FtgCharaData.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="pch.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Chara\Chara.cpp">
       <Filter>Chara</Filter>
     </ClCompile>
@@ -52,6 +55,8 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Overview.txt" />
+    <Text Include="Overview.txt">
+      <Filter>Document</Filter>
+    </Text>
   </ItemGroup>
 </Project>

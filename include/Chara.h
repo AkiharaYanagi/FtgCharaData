@@ -10,14 +10,13 @@
 //-------------------------------------------------------------------------------------------------
 // ヘッダファイルのインクルード
 //-------------------------------------------------------------------------------------------------
-//#include "Game.h"
-//#include "GameTexture.h"
+//※ Siv3DもGameLibraryも用いない独立した定義
 
 #include "Chara_Const.h"
-#include "Action.h"
-#include "Effect.h"
-#include "Behavior.h"
-#include "Command.h"
+#include "Compend.h"
+#include "Compend.h"
+#include "Route.h"
+
 
 //-------------------------------------------------------------------------------------------------
 // 宣言
@@ -28,14 +27,11 @@ namespace GAME
 	//	キャラ 実行上データ ver.050
 	//	
 	//	キャラ	
-	//		┣ビヘイビア
+	//		┣コンペンド：ビヘイビア
 	//		┃	┣[]スクリプト
-	//		┃		┣[]ルート
-	//		┃		┣[]Efジェネレート
 	//		┃
-	//		┣ガーニッシュ
+	//		┣コンペンド：ガーニッシュ
 	//		┃	┣[]スクリプト
-	//		┃		┣[]Efジェネレート
 	//		┃
 	//		┣[]コマンド
 	//		┣[]ブランチ
@@ -47,12 +43,12 @@ namespace GAME
 	class Chara
 	{
 //		Behavior		m_bhvMain;		//メイン スクリプト
-		PVP_TxBs		m_pvpTxMain;	//メインイメージ テクスチャ配列
-		PVP_Action		m_pvpAction;	//アクション配列
+//		PVP_TxBs		m_pvpTxMain;	//メインイメージ テクスチャ配列
+		PVP_Sqc			m_pvpAction;	//アクション配列
 
 //		Garnish			m_bhvEf;		//EF スクリプト
-		PVP_TxBs		m_pvpTxEf;		//EFイメージ テクスチャ配列
-		PVP_Effect		m_pvpEf;		//エフェクト配列
+//		PVP_TxBs		m_pvpTxEf;		//EFイメージ テクスチャ配列
+		PVP_Sqc			m_pvpEf;		//エフェクト配列
 
 		VP_Command		m_vpCommand;	//コマンド配列
 		VP_Branch		m_vpBranch;		//ブランチ配列
@@ -69,6 +65,8 @@ namespace GAME
 
 		void Clear ();
 
+#if 0
+
 		//-----------------------------------------------------------------
 		//メインイメージ テクスチャ配列ポインタ
 		PVP_TxBs GetpvpMainTexture () const { return m_pvpTxMain; }
@@ -79,25 +77,27 @@ namespace GAME
 		//メインイメージ テクスチャポインタの取得
 		P_TxBs GetpMainTexture ( UINT index ) { return m_pvpTxMain->at ( index ); }
 
+#endif // 0
+
 		//-----------------------------------------------------------------
 		//アクション配列ポインタを取得
-		PVP_Action GetpvpAction () { return m_pvpAction; }
+		PVP_Sqc GetpvpAction () { return m_pvpAction; }
 
 		//アクション配列に追加
-		void AddpAction ( P_Action pAction ) { m_pvpAction->push_back ( pAction ); }
+		void AddpAction ( P_Sqc pAction ) { m_pvpAction->push_back ( pAction ); }
 
 		//アクション配列にまとめて追加
-		void AddpAction ( unique_ptr < P_Action [] > arypAction, rsize_t size );
-		void AddpAction ( std::shared_ptr < P_Action [] > arypAction, rsize_t size );
-		void AddpAction ( const std::vector < P_Action > & arypAction, rsize_t size );
+		void AddpAction ( std::unique_ptr < P_Sqc [] > arypAction, rsize_t size );
+		void AddpAction ( std::shared_ptr < P_Sqc [] > arypAction, rsize_t size );
+		void AddpAction ( const std::vector < P_Sqc > & arypAction, rsize_t size );
 
 		//---------------------------------------------------------------------
 		//名前からアクションIDを取得する(無いときは０を返す)
 		UINT GetActionID ( tstring name ) const;
 
 		//アクションポインタを取得
-		P_Action GetpAction ( UINT index ) { return m_pvpAction->at ( index ); }
-		P_Action GetpAction ( tstring name ) { return GetpAction ( GetActionID ( name ) ); }
+		P_Sqc GetpAction ( UINT index ) { return m_pvpAction->at ( index ); }
+		P_Sqc GetpAction ( tstring name ) { return GetpAction ( GetActionID ( name ) ); }
 
 		//---------------------------------------------------------------------
 		//スクリプトポインタを取得
@@ -108,6 +108,7 @@ namespace GAME
 		{
 			return m_pvpAction->at ( indexAction )->IsNextScript( indexScript );
 		}
+#if 0
 
 		//-----------------------------------------------------------------
 		//Efイメージ テクスチャ配列ポインタ
@@ -116,27 +117,28 @@ namespace GAME
 		//Efイメージ テクスチャ配列に追加
 		void AddpEfTexture ( P_TxBs pTexture ) { m_pvpTxEf->push_back ( pTexture ); }
 
-		//エフェクト配列にまとめて追加
-		void AddpEffect ( unique_ptr < P_Effect [] > arypEffect, rsize_t size );
-		void AddpEffect ( const std::vector < P_Effect > & arypEffect, rsize_t size );
-
 		//Efイメージ テクスチャポインタの取得
 		P_TxBs GetpEfTexture ( UINT index ) { return m_pvpTxEf->at ( index ); }
+#endif // 0
 
 		//-----------------------------------------------------------------
 		//エフェクト配列に追加
-		void AddpEffect ( P_Effect pEffect ) { m_pvpEf->push_back ( pEffect ); }
+		void AddpEffect ( P_Sqc pEffect ) { m_pvpEf->push_back ( pEffect ); }
 
 		//エフェクト配列ポインタを取得
-		PVP_Effect GetpvpEffect () { return m_pvpEf; }
+		PVP_Sqc GetpvpEffect () { return m_pvpEf; }
 
 		//エフェクトポインタを取得
-		P_Effect GetpEffect ( UINT index ) { return m_pvpEf->at ( index ); }
+		P_Sqc GetpEffect ( UINT index ) { return m_pvpEf->at ( index ); }
+
+		//エフェクト配列にまとめて追加
+		void AddpEffect ( std::unique_ptr < P_Sqc [] > arypEffect, rsize_t size );
+		void AddpEffect ( const std::vector < P_Sqc > & arypEffect, rsize_t size );
 
 		//---------------------------------------------------------------------
 		//コマンド配列に追加
 		void AddpCommand ( P_Command pCommand ) { m_vpCommand.push_back ( pCommand ); }
-		void AddaCommand ( unique_ptr < P_Command [] > aryCmd, UINT size );
+		void AddaCommand ( std::unique_ptr < P_Command [] > aryCmd, UINT size );
 
 		//コマンドを取得
 		P_Command GetpCommand ( UINT indexCommand ) const { return m_vpCommand[indexCommand]; }
@@ -145,7 +147,7 @@ namespace GAME
 
 		//ブランチ配列に追加
 		void AddpBranch ( P_Branch pBranch ) { m_vpBranch.push_back ( pBranch ); }
-		void AddaBranch ( unique_ptr < P_Branch [] > aryBrc, UINT size );
+		void AddaBranch ( std::unique_ptr < P_Branch [] > aryBrc, UINT size );
 
 		//ブランチを取得
 		P_Branch GetpBranch ( UINT indexBranch ) const { return m_vpBranch[indexBranch]; }
@@ -154,7 +156,7 @@ namespace GAME
 
 		//ルート配列に追加
 		void AddpRoute ( P_Route pRoute ) { m_vpRoute.push_back ( pRoute ); }
-		void AddaRoute ( unique_ptr < P_Route [] > aryRut, UINT size );
+		void AddaRoute ( std::unique_ptr < P_Route [] > aryRut, UINT size );
 
 		//ルートを取得
 		P_Route GetpRoute ( UINT indexRoute ) const { return m_vpRoute[indexRoute]; }

@@ -10,8 +10,8 @@
 // ヘッダファイルのインクルード
 //-------------------------------------------------------------------------------------------------
 //#include "Game.h"
+//#include "DxDefine.h"
 #include "Define.h"
-#include "DxDefine.h"
 #include "Rect.h"
 
 #include "Chara_Const.h"
